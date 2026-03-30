@@ -1,0 +1,15 @@
+student_id,professor_id,admin_id,name,role,password
+20201234,,,Kim Student 01,student,devpass123
+20201235,,,Kim Student 02,student,devpass123
+20201236,,,Kim Student 03,student,devpass123
+20201237,,,Kim Student 04,student,devpass123
+20201238,,,Kim Student 05,student,devpass123
+20201239,,,Kim Student 06,student,devpass123
+20201240,,,Kim Student 07,student,devpass123
+20201241,,,Kim Student 08,student,devpass123
+20201242,,,Kim Student 09,student,devpass123
+20201243,,,Kim Student 10,student,devpass123
+,PRF001,,Park Professor 01,professor,devpass123
+,PRF002,,Lee Professor 02,professor,devpass123
+,,ADM001,Choi Admin 01,admin,devpass123
+,,ADM002,Jung Admin 02,admin,devpass123

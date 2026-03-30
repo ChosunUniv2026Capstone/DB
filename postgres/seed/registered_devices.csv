@@ -1,0 +1,11 @@
+student_id,label,mac_address,status
+20201234,Kim iPhone,36:68:99:4f:01:db,active
+20201235,Kim Android,8a:22:55:10:aa:11,active
+20201236,Park Laptop,9c:ef:d5:21:44:90,active
+20201237,Lee Tablet,aa:bb:cc:dd:ee:01,active
+20201238,Han Phone,aa:bb:cc:dd:ee:02,active
+20201239,Choi Phone,52:54:00:12:34:56,active
+20201240,Seo Laptop,52:54:00:12:34:57,active
+20201241,Yoon Tablet,52:54:00:12:34:58,active
+20201242,Kang Phone,52:54:00:12:34:59,active
+20201243,Lim Laptop,52:54:00:12:34:5a,active

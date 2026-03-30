@@ -1,0 +1,21 @@
+course_code,title,professor_id
+CSE101,Smart Campus Systems,PRF001
+CSE102,Advanced Web Programming,PRF001
+CSE103,Database Systems,PRF002
+CSE104,Network Programming,PRF002
+CSE105,Software Architecture,PRF001
+CSE106,Operating Systems,PRF002
+CSE107,Cloud Native Development,PRF001
+CSE108,Computer Security,PRF002
+CSE109,Mobile App Studio,PRF001
+CSE110,UI UX Engineering,PRF002
+CSE111,Distributed Systems,PRF001
+CSE112,Data Engineering,PRF002
+CSE113,Applied Machine Learning,PRF001
+CSE114,Information Retrieval,PRF002
+CSE115,Computer Graphics,PRF001
+CSE116,Capstone Design A,PRF002
+CSE117,Capstone Design B,PRF001
+CSE118,IoT Application Design,PRF002
+CSE119,Human Computer Interaction,PRF001
+CSE120,DevOps Practice,PRF002
