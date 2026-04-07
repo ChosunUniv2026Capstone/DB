@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS classroom_networks (
     ap_id VARCHAR(64) NOT NULL,
     ssid VARCHAR(120) NOT NULL,
     gateway_host VARCHAR(120),
+    signal_threshold_dbm INTEGER,
     collection_mode VARCHAR(40) NOT NULL DEFAULT 'openwrt-ssh',
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     UNIQUE (classroom_id, ap_id)
