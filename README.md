@@ -9,7 +9,13 @@ Compose stack.
 
 - `postgres/init/001_schema.sql` initial schema
 - `postgres/init/010_seed.sql` development seed data
+- `postgres/init/011_presence_threshold.sql` classroom AP threshold patch
+- `postgres/init/012_attendance_demo_seed.sql` attendance demo seed
+- `postgres/init/013_exam_schema.sql` exam MVP schema
 - `postgres/seed/*.csv` CSV seed inputs for users, classrooms, AP mappings, courses, schedules, enrollments, and registered devices
+
+The DB init set does not ship a default exam demo seed. Professors are expected
+to create exam data through the application flow.
 
 ## Usage
 
