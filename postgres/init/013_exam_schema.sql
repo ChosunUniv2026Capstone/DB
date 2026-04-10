@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS exams (
     starts_at TIMESTAMPTZ NOT NULL,
     ends_at TIMESTAMPTZ NOT NULL,
     duration_minutes INTEGER NOT NULL CHECK (duration_minutes > 0),
-    requires_presence BOOLEAN NOT NULL DEFAULT FALSE,
+    requires_presence BOOLEAN NOT NULL DEFAULT TRUE,
     late_entry_allowed BOOLEAN NOT NULL DEFAULT TRUE,
     auto_submit_enabled BOOLEAN NOT NULL DEFAULT TRUE,
     shuffle_questions BOOLEAN NOT NULL DEFAULT FALSE,
