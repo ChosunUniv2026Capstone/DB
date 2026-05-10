@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/ChosunUniv2026Capstone/DB/compare/v0.3.0...v0.4.0) (2026-05-10)
+
+
+### Features
+
+* **db:** preserve object ownership before storage rollout ([483e9f3](https://github.com/ChosunUniv2026Capstone/DB/commit/483e9f310985b71288cffe1046ea7e69ada04abf))
+
 ## [0.3.0](https://github.com/ChosunUniv2026Capstone/DB/compare/v0.2.0...v0.3.0) (2026-05-10)
 
 
