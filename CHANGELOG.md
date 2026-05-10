@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/ChosunUniv2026Capstone/DB/compare/v0.2.0...v0.3.0) (2026-05-10)
+
+
+### Features
+
+* **db:** add assignment schema ([a899bd9](https://github.com/ChosunUniv2026Capstone/DB/commit/a899bd92f779ef9d7914c18ff477aa0a3eeaa014))
+
 ## [0.2.0](https://github.com/ChosunUniv2026Capstone/DB/compare/v0.1.0...v0.2.0) (2026-04-26)
 
 
