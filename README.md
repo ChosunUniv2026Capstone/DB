@@ -15,11 +15,12 @@ Compose stack.
 - `postgres/init/014_assignment_schema.sql` assignment schema
 - `postgres/init/015_object_storage_schema.sql` Garage/S3-compatible object metadata, deletion jobs, and trigger strategy
 - `postgres/seed/*.csv` CSV seed inputs for users, classrooms, AP mappings, courses, schedules, enrollments, and registered devices
-- `postgres/migrations/014_assignment_schema_upgrade.sql` idempotent upgrade path for existing volumes that predate assignment tables
+- `postgres/migrations/014_assignment_schema_upgrade.sql` idempotent assignment-table upgrade path for existing volumes
+- `postgres/migrations/015_object_storage_schema_upgrade.sql` idempotent object metadata/deletion-outbox upgrade path for existing volumes
 
 Object storage trigger checks live in `postgres/tests/object_storage_triggers.sql`.
 
-Existing Postgres volumes do not re-run `postgres/init/*.sql`. For assignment rollouts on persisted Service `postgres-data` volumes, run the migration documented in `postgres/migrations/README.md` or use the Service release manifest `components.db.resetRequired` gate when a reset is acceptable.
+Existing Postgres volumes do not re-run `postgres/init/*.sql`. For assignment/object-storage rollouts on persisted Service `postgres-data` volumes, run the ordered migrations documented in `postgres/migrations/README.md` or use the Service release manifest `components.db.resetRequired` gate when a reset is acceptable.
 
 The DB init set does not ship a default exam demo seed. Professors are expected
 to create exam data through the application flow.
