@@ -1,11 +1,11 @@
 classroom_code,ap_id,ssid,gateway_host,collection_mode
-B101,phy0-ap0,CU-B101-5G-1,192.168.97.1,openwrt-push
-B101,phy1-ap0,CU-B101-2G-1,192.168.97.1,openwrt-push
+B101,phy0-ap0,SmartClass-Demo,192.168.97.1,openwrt-push
+B101,phy1-ap0,SmartClass-Demo,192.168.97.1,openwrt-push
 B101,phy2-ap0,CU-B101-5G-2,192.168.10.12,openwrt-ssh
 B101,phy3-ap0,CU-B101-2G-2,192.168.10.12,openwrt-ssh
-B102,phy4-ap0,CU-B102-5G-1,192.168.98.1,openwrt-push
-B102,phy5-ap0,CU-B102-2G-1,192.168.98.1,openwrt-push
+B102,phy4-ap0,SmartClass-Demo,192.168.97.2,openwrt-push
+B102,phy5-ap0,SmartClass-Demo,192.168.97.2,openwrt-push
 B102,phy6-ap0,CU-B102-5G-2,192.168.10.22,openwrt-ssh
-C201,phy7-ap0,CU-C201-5G-1,192.168.99.1,openwrt-push
-C201,phy8-ap0,CU-C201-2G-1,192.168.99.1,openwrt-push
+C201,phy7-ap0,SmartClass-Demo,192.168.97.3,openwrt-push
+C201,phy8-ap0,SmartClass-Demo,192.168.97.3,openwrt-push
 C201,phy9-ap0,CU-C201-5G-2,192.168.10.32,openwrt-ssh
