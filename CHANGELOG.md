@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.5.0](https://github.com/ChosunUniv2026Capstone/DB/compare/v0.4.1...v0.5.0) (2026-05-16)
+
+
+### Features
+
+* **db:** add OpenWrt collector registry schema ([5019b48](https://github.com/ChosunUniv2026Capstone/DB/commit/5019b4856f5c1a2bf29b8f67af6267fa806ad50b))
+* **db:** enable selected LMS demo persistence ([9a33914](https://github.com/ChosunUniv2026Capstone/DB/commit/9a339142e00d080c0b2d14fdb59362fe6efe10ae))
+
+
+### Bug Fixes
+
+* **db:** align OpenWrt seed metadata with unified SSID ([9de80de](https://github.com/ChosunUniv2026Capstone/DB/commit/9de80de7a3ed82a3dc4b77812183fc78322d2155))
+
 ## [0.4.1](https://github.com/ChosunUniv2026Capstone/DB/compare/v0.4.0...v0.4.1) (2026-05-14)
 
 
