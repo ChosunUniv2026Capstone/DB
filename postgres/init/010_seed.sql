@@ -44,6 +44,46 @@ FROM seed_networks n
 JOIN classrooms c ON c.classroom_code = n.classroom_code
 ON CONFLICT (classroom_id, ap_id) DO NOTHING;
 
+CREATE TEMP TABLE seed_access_points (
+    collector_ap_id VARCHAR(64),
+    label VARCHAR(120),
+    management_ip VARCHAR(64),
+    tailnet_ip VARCHAR(64),
+    status VARCHAR(20)
+);
+
+\copy seed_access_points FROM '/seed-data/access_points.csv' WITH (FORMAT csv, HEADER true)
+
+INSERT INTO access_points (collector_ap_id, label, management_ip, tailnet_ip, status)
+SELECT collector_ap_id, label, management_ip, tailnet_ip, status
+FROM seed_access_points
+ON CONFLICT (collector_ap_id) DO UPDATE
+SET label = EXCLUDED.label,
+    management_ip = EXCLUDED.management_ip,
+    tailnet_ip = EXCLUDED.tailnet_ip,
+    status = EXCLUDED.status,
+    updated_at = NOW();
+
+CREATE TEMP TABLE seed_access_point_interfaces (
+    collector_ap_id VARCHAR(64),
+    interface_id VARCHAR(64),
+    ap_id VARCHAR(64),
+    bssid VARCHAR(32)
+);
+
+\copy seed_access_point_interfaces FROM '/seed-data/access_point_interfaces.csv' WITH (FORMAT csv, HEADER true)
+
+INSERT INTO access_point_interfaces (access_point_id, interface_id, bssid, ssid, classroom_network_id)
+SELECT ap.id, iface.interface_id, NULLIF(iface.bssid, ''), cn.ssid, cn.id
+FROM seed_access_point_interfaces iface
+JOIN access_points ap ON ap.collector_ap_id = iface.collector_ap_id
+JOIN classroom_networks cn ON cn.ap_id = iface.ap_id
+ON CONFLICT (access_point_id, interface_id) DO UPDATE
+SET bssid = EXCLUDED.bssid,
+    ssid = EXCLUDED.ssid,
+    classroom_network_id = EXCLUDED.classroom_network_id;
+
+
 CREATE TEMP TABLE seed_courses (
     course_code VARCHAR(32),
     title VARCHAR(200),
