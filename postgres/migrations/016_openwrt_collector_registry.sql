@@ -50,6 +50,12 @@ SET label = EXCLUDED.label,
     status = EXCLUDED.status,
     updated_at = NOW();
 
+DELETE FROM access_point_interfaces api
+USING access_points ap
+WHERE api.access_point_id = ap.id
+  AND ap.collector_ap_id IN ('openwrt-a', 'openwrt-b', 'openwrt-c')
+  AND api.interface_id <> 'phy1-ap0';
+
 INSERT INTO access_point_interfaces (access_point_id, interface_id, ssid, classroom_network_id)
 SELECT ap.id, mapping.interface_id, cn.ssid, cn.id
 FROM (VALUES
