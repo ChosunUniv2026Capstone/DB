@@ -1,0 +1,4 @@
+collector_ap_id,label,management_ip,tailnet_ip,status
+openwrt-a,Demo AP A / B101,192.168.97.1,100.78.116.89,active
+openwrt-b,Demo AP B / B102,192.168.98.1,100.86.49.51,active
+openwrt-c,Demo AP C / C201,192.168.99.1,100.99.237.79,active

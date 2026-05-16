@@ -191,3 +191,33 @@ CREATE INDEX IF NOT EXISTS idx_attendance_status_audit_logs_student_changed_at
 
 CREATE INDEX IF NOT EXISTS idx_attendance_status_audit_logs_session_projection
     ON attendance_status_audit_logs (attendance_session_id, projection_key, changed_at DESC);
+
+CREATE TABLE IF NOT EXISTS access_points (
+    id BIGSERIAL PRIMARY KEY,
+    collector_ap_id VARCHAR(64) NOT NULL UNIQUE,
+    label VARCHAR(120) NOT NULL,
+    management_ip VARCHAR(64),
+    tailnet_ip VARCHAR(64),
+    status VARCHAR(20) NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'inactive')),
+    token_hash VARCHAR(128),
+    token_version INTEGER NOT NULL DEFAULT 0,
+    token_revoked_at TIMESTAMPTZ,
+    last_rotated_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS access_point_interfaces (
+    id BIGSERIAL PRIMARY KEY,
+    access_point_id BIGINT NOT NULL REFERENCES access_points(id) ON DELETE CASCADE,
+    interface_id VARCHAR(64) NOT NULL,
+    bssid VARCHAR(32),
+    ssid VARCHAR(120),
+    classroom_network_id BIGINT NOT NULL REFERENCES classroom_networks(id) ON DELETE CASCADE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    UNIQUE (access_point_id, interface_id),
+    UNIQUE (classroom_network_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_access_point_interfaces_network_id
+    ON access_point_interfaces (classroom_network_id);

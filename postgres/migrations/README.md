@@ -73,3 +73,41 @@ reviewed destructive drop in reverse dependency order:
 
 Never run the destructive rollback against a production/demo volume without a
 verified backup and operator approval.
+
+## OpenWrt collector registry upgrade
+
+Use `016_openwrt_collector_registry.sql` when a persisted `postgres-data` volume
+predates the OpenWrt local collector push rollout. It creates:
+
+- `access_points` for physical OpenWrt collector nodes and token metadata.
+- `access_point_interfaces` for physical AP interface/BSS to `classroom_networks` mapping.
+- demo mappings for `openwrt-a`, `openwrt-b`, and `openwrt-c`.
+- `openwrt-push` collection mode for the actual demo AP-backed classroom networks.
+
+Run it after `015_object_storage_schema_upgrade.sql` and before deploying a
+Backend/PresenceService version that expects AP registry data.
+
+Example:
+
+```bash
+cd ../Service
+./scripts/up-image.sh -d
+
+docker compose \
+  --project-directory "$PWD" \
+  --env-file .env \
+  -f compose.yml -f compose.image.yml \
+  exec -T postgres \
+  psql -U "${POSTGRES_USER:-smartclass}" -d "${POSTGRES_DB:-smartclass}" \
+  < ../DB/postgres/migrations/016_openwrt_collector_registry.sql
+```
+
+### OpenWrt collector rollback
+
+This migration is additive and mostly operational metadata. To rollback without
+deleting attendance/course data, first stop collector-capable
+Backend/PresenceService versions and revoke AP tokens. If a destructive rollback
+is still required after backup, drop `access_point_interfaces`, then
+`access_points`, and optionally set affected `classroom_networks.collection_mode`
+back to `openwrt-ssh`. Do not drop `classroom_networks` rows because they remain
+course/classroom network contract data.
