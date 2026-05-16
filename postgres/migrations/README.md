@@ -18,6 +18,8 @@ in order:
 2. `015_object_storage_schema_upgrade.sql` adds the object-storage metadata
    columns, domain attachment metadata tables, `object_deletion_jobs`, and
    deletion triggers required by Backend object-storage APIs.
+3. `017_selected_lms_subset.sql` adds selected LMS grading fields, Q&A tables,
+   learning progress snapshots, and demo rows for grade/feedback, Q&A, and progress APIs.
 
 Both migrations are intentionally idempotent (`CREATE ... IF NOT EXISTS`,
 `ADD COLUMN IF NOT EXISTS`, and trigger replacement) so they can be rerun safely
@@ -46,6 +48,14 @@ docker compose \
   exec -T postgres \
   psql -U "${POSTGRES_USER:-smartclass}" -d "${POSTGRES_DB:-smartclass}" \
   < ../DB/postgres/migrations/015_object_storage_schema_upgrade.sql
+
+docker compose \
+  --project-directory "$PWD" \
+  --env-file .env \
+  -f compose.yml -f compose.image.yml \
+  exec -T postgres \
+  psql -U "${POSTGRES_USER:-smartclass}" -d "${POSTGRES_DB:-smartclass}" \
+  < ../DB/postgres/migrations/017_selected_lms_subset.sql
 ```
 
 For demo releases, prefer the Service release manifest gate: if a DB image
@@ -67,9 +77,13 @@ reviewed destructive drop in reverse dependency order:
 1. Object-delete triggers on attachment/export tables
 2. `object_deletion_jobs`
 3. Object metadata attachment/export tables added by `015_object_storage_schema_upgrade.sql`
-4. `assignment_submission_attachments`
-5. `assignment_submissions`
-6. `assignments`
+4. `learning_progress`
+5. `course_qna_posts`
+6. `course_qna_threads`
+7. selected LMS grading columns on `assignment_submissions` and `assignments`
+8. `assignment_submission_attachments`
+9. `assignment_submissions`
+10. `assignments`
 
 Never run the destructive rollback against a production/demo volume without a
 verified backup and operator approval.
@@ -111,3 +125,15 @@ is still required after backup, drop `access_point_interfaces`, then
 `access_points`, and optionally set affected `classroom_networks.collection_mode`
 back to `openwrt-ssh`. Do not drop `classroom_networks` rows because they remain
 course/classroom network contract data.
+
+
+## Selected LMS subset upgrade
+
+`017_selected_lms_subset.sql` is an additive/idempotent upgrade for Backend #36 selected LMS scope. It adds:
+
+- `assignments.max_score`
+- assignment submission grading columns (`score`, `feedback`, `graded_by_user_id`, `graded_at`, `grading_status`)
+- `course_qna_threads` and `course_qna_posts`
+- `learning_progress`
+
+Run after `016_openwrt_collector_registry.sql` on persisted Service deployments. Rollback requires a backup restore or manual removal of the added tables/columns after stopping Backend/Front traffic that reads selected LMS endpoints.
