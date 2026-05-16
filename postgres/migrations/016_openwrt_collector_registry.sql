@@ -53,15 +53,12 @@ SET label = EXCLUDED.label,
 INSERT INTO access_point_interfaces (access_point_id, interface_id, ssid, classroom_network_id)
 SELECT ap.id, mapping.interface_id, cn.ssid, cn.id
 FROM (VALUES
-    ('openwrt-a', 'phy0-ap0'),
-    ('openwrt-a', 'phy1-ap0'),
-    ('openwrt-b', 'phy4-ap0'),
-    ('openwrt-b', 'phy5-ap0'),
-    ('openwrt-c', 'phy7-ap0'),
-    ('openwrt-c', 'phy8-ap0')
-) AS mapping(collector_ap_id, interface_id)
+    ('openwrt-a', 'phy1-ap0', 'phy1-ap0'),
+    ('openwrt-b', 'phy1-ap0', 'phy4-ap0'),
+    ('openwrt-c', 'phy1-ap0', 'phy7-ap0')
+) AS mapping(collector_ap_id, interface_id, classroom_ap_id)
 JOIN access_points ap ON ap.collector_ap_id = mapping.collector_ap_id
-JOIN classroom_networks cn ON cn.ap_id = mapping.interface_id
+JOIN classroom_networks cn ON cn.ap_id = mapping.classroom_ap_id
 ON CONFLICT (access_point_id, interface_id) DO UPDATE
 SET ssid = EXCLUDED.ssid,
     classroom_network_id = EXCLUDED.classroom_network_id;

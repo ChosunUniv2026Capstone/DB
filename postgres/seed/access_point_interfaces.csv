@@ -1,7 +1,4 @@
 collector_ap_id,interface_id,ap_id,bssid
-openwrt-a,phy0-ap0,phy0-ap0,
 openwrt-a,phy1-ap0,phy1-ap0,
-openwrt-b,phy4-ap0,phy4-ap0,
-openwrt-b,phy5-ap0,phy5-ap0,
-openwrt-c,phy7-ap0,phy7-ap0,
-openwrt-c,phy8-ap0,phy8-ap0,
+openwrt-b,phy1-ap0,phy4-ap0,
+openwrt-c,phy1-ap0,phy7-ap0,
