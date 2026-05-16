@@ -30,10 +30,11 @@ CREATE INDEX IF NOT EXISTS idx_access_point_interfaces_network_id
 
 UPDATE classroom_networks
 SET collection_mode = 'openwrt-push',
+    ssid = 'SmartClass-Demo',
     gateway_host = CASE
         WHEN ap_id LIKE 'phy0-%' OR ap_id LIKE 'phy1-%' THEN '192.168.97.1'
-        WHEN ap_id LIKE 'phy4-%' OR ap_id LIKE 'phy5-%' THEN '192.168.98.1'
-        WHEN ap_id LIKE 'phy7-%' OR ap_id LIKE 'phy8-%' THEN '192.168.99.1'
+        WHEN ap_id LIKE 'phy4-%' OR ap_id LIKE 'phy5-%' THEN '192.168.97.2'
+        WHEN ap_id LIKE 'phy7-%' OR ap_id LIKE 'phy8-%' THEN '192.168.97.3'
         ELSE gateway_host
     END
 WHERE ap_id IN ('phy0-ap0','phy1-ap0','phy4-ap0','phy5-ap0','phy7-ap0','phy8-ap0');
@@ -41,8 +42,8 @@ WHERE ap_id IN ('phy0-ap0','phy1-ap0','phy4-ap0','phy5-ap0','phy7-ap0','phy8-ap0
 INSERT INTO access_points (collector_ap_id, label, management_ip, tailnet_ip, status)
 VALUES
     ('openwrt-a', 'Demo AP A / B101', '192.168.97.1', '100.78.116.89', 'active'),
-    ('openwrt-b', 'Demo AP B / B102', '192.168.98.1', '100.86.49.51', 'active'),
-    ('openwrt-c', 'Demo AP C / C201', '192.168.99.1', '100.99.237.79', 'active')
+    ('openwrt-b', 'Demo AP B / B102', '192.168.97.2', '100.86.49.51', 'active'),
+    ('openwrt-c', 'Demo AP C / C201', '192.168.97.3', '100.99.237.79', 'active')
 ON CONFLICT (collector_ap_id) DO UPDATE
 SET label = EXCLUDED.label,
     management_ip = EXCLUDED.management_ip,
