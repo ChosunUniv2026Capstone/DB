@@ -31,8 +31,8 @@ The shared compose file in `CodexKit` mounts `postgres/init` into the Postgres
 container's `/docker-entrypoint-initdb.d`.
 
 Seed summary:
-- students: 10
-- professors: 2
+- students: 15
+- professors: 3
 - admins: 2
 - classrooms: 3
 - AP mappings: 10

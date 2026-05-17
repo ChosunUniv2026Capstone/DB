@@ -1,7 +1,7 @@
 course_code,title,professor_id
-CSE101,Smart Campus Systems,PRF001
-CSE102,Advanced Web Programming,PRF001
-CSE103,Database Systems,PRF002
+CSE101,Smart Campus Systems,PRF000
+CSE102,Advanced Web Programming,PRF000
+CSE103,Database Systems,PRF000
 CSE104,Network Programming,PRF002
 CSE105,Software Architecture,PRF001
 CSE106,Operating Systems,PRF002

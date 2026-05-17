@@ -13,3 +13,9 @@ student_id,professor_id,admin_id,name,role,password
 ,PRF002,,Lee Professor 02,professor,devpass123
 ,,ADM001,Choi Admin 01,admin,devpass123
 ,,ADM002,Jung Admin 02,admin,devpass123
+20203258,,,Demo Student 20203258,student,devpass123
+20234887,,,Demo Student 20234887,student,devpass123
+20234892,,,Demo Student 20234892,student,devpass123
+20234896,,,Demo Student 20234896,student,devpass123
+20203175,,,Demo Student 20203175,student,devpass123
+,PRF000,,Demo Professor 000,professor,devpass123
