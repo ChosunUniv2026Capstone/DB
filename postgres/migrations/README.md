@@ -56,6 +56,14 @@ docker compose \
   exec -T postgres \
   psql -U "${POSTGRES_USER:-smartclass}" -d "${POSTGRES_DB:-smartclass}" \
   < ../DB/postgres/migrations/017_selected_lms_subset.sql
+
+docker compose \
+  --project-directory "$PWD" \
+  --env-file .env \
+  -f compose.yml -f compose.image.yml \
+  exec -T postgres \
+  psql -U "${POSTGRES_USER:-smartclass}" -d "${POSTGRES_DB:-smartclass}" \
+  < ../DB/postgres/migrations/018_continuous_attendance_monitoring.sql
 ```
 
 For demo releases, prefer the Service release manifest gate: if a DB image
@@ -84,9 +92,12 @@ reviewed destructive drop in reverse dependency order:
 8. `assignment_submission_attachments`
 9. `assignment_submissions`
 10. `assignments`
+11. `attendance_monitoring_states`
+12. `attendance_monitoring_leases`
+13. `attendance_sessions.attendance_policy` and the `CSE999` seed rows, only after stopping continuous-attendance-capable Backend/Front versions.
 
 Never run the destructive rollback against a production/demo volume without a
-verified backup and operator approval.
+verified backup and operator approval. Continuous-attendance rollback is destructive if monitoring state or the `CSE999` seed has been used; prefer restore from a pre-upgrade backup.
 
 ## OpenWrt collector registry upgrade
 
@@ -137,3 +148,19 @@ course/classroom network contract data.
 - `learning_progress`
 
 Run after `016_openwrt_collector_registry.sql` on persisted Service deployments. Rollback requires a backup restore or manual removal of the added tables/columns after stopping Backend/Front traffic that reads selected LMS endpoints.
+
+
+## Continuous attendance monitoring upgrade
+
+`018_continuous_attendance_monitoring.sql` is an additive/idempotent upgrade for `continuous_presence_v1`. It adds:
+
+- `attendance_sessions.attendance_policy` with safe legacy backfill (`manual_v1` for non-smart legacy rows, `smart_window_v1` for legacy smart rows) and a legacy-safe DB default of `smart_window_v1`; Backend must explicitly write `continuous_presence_v1` for new continuous smart sessions.
+- `attendance_monitoring_leases` for session-scoped Backend worker ownership (`lease_owner`, `lease_until`, `heartbeat_at`).
+- `attendance_monitoring_states` for per-session/projection/student accumulators (`last_accounted_until`, `away_seconds`, `unknown_seconds_consumed`, `current_presence_state`, `last_presence_reason`, `status_candidate`, `finalized_at`).
+- `CSE999` / `B101` / `PRF002` seed data: two daily schedule windows (`00:00-12:00`, `12:00-00:00`) for all seven days plus active enrollments for `20201239` and `20201240`.
+
+Run after `017_selected_lms_subset.sql` on persisted Service deployments, before deploying Backend/Front versions that read `attendance_policy` or monitoring tables.
+
+### Continuous attendance rollback
+
+This migration is additive, but rollback can delete monitoring state and the 24h/7d test course. First stop continuous-attendance-capable Backend/Front versions and take a verified backup. Prefer restoring the pre-upgrade backup. If a reviewed destructive rollback is still required, delete `attendance_monitoring_states`, delete `attendance_monitoring_leases`, delete `CSE999` course/enrollment/schedule rows, and only then drop `attendance_sessions.attendance_policy` after all application code no longer reads it.
