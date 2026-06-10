@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/ChosunUniv2026Capstone/DB/compare/v0.5.0...v0.6.0) (2026-06-10)
+
+
+### Features
+
+* **db:** preserve continuous attendance monitoring state ([e3c9f82](https://github.com/ChosunUniv2026Capstone/DB/commit/e3c9f82f48098e4e13ea82de56aba5f6aae73c40))
+
 ## [0.5.0](https://github.com/ChosunUniv2026Capstone/DB/compare/v0.4.1...v0.5.0) (2026-05-16)
 
 
