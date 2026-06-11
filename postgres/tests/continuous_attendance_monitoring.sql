@@ -60,7 +60,7 @@ BEGIN
     INTO v_course_id, v_classroom_id, v_professor_user_id, v_student_user_id
     FROM courses c
     JOIN classrooms cl ON cl.classroom_code = 'B101'
-    JOIN users professor ON professor.professor_id = 'PRF002'
+    JOIN users professor ON professor.professor_id = 'PRF001'
     JOIN users student ON student.student_id = '20201239'
     WHERE c.course_code = 'CSE999';
 
