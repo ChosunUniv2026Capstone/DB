@@ -98,7 +98,7 @@ CREATE INDEX IF NOT EXISTS idx_attendance_monitoring_states_unfinalized
 -- Backend slot projection can produce the final 23:30-00:00 segment without a
 -- non-portable 24:00 TIME value.
 WITH professor AS (
-    SELECT id FROM users WHERE professor_id = 'PRF002'
+    SELECT id FROM users WHERE professor_id = 'PRF001'
 )
 INSERT INTO courses (course_code, title, professor_user_id)
 SELECT 'CSE999', 'Continuous Presence 24/7 Test Course', professor.id
