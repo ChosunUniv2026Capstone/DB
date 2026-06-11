@@ -13,6 +13,7 @@ DECLARE
     v_session_id BIGINT;
     v_cse999_schedule_count INTEGER;
     v_cse999_enrollment_count INTEGER;
+    v_student_count INTEGER;
 BEGIN
     IF NOT EXISTS (
         SELECT 1
@@ -46,8 +47,13 @@ BEGIN
     WHERE c.course_code = 'CSE999'
       AND ce.status = 'active';
 
-    IF v_cse999_enrollment_count < 2 THEN
-        RAISE EXCEPTION 'CSE999 expected at least 2 active enrollments, got %', v_cse999_enrollment_count;
+    SELECT COUNT(*) INTO v_student_count
+    FROM users
+    WHERE role = 'student'
+      AND student_id IS NOT NULL;
+
+    IF v_cse999_enrollment_count <> v_student_count THEN
+        RAISE EXCEPTION 'CSE999 expected active enrollments for all % students, got %', v_student_count, v_cse999_enrollment_count;
     END IF;
 
     SELECT c.id, cl.id, professor.id, student.id

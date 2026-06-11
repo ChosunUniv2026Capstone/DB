@@ -42,5 +42,5 @@ Seed summary:
 - admins: 2
 - classrooms: 3
 - AP mappings: 10
-- courses: 21 (20 CSV courses plus `CSE999` continuous attendance 24h/7d test course)
+- courses: 21 (20 CSV courses plus `CSE999` continuous attendance 24h/7d test course enrolled to every student)
 - default dev password: `devpass123`

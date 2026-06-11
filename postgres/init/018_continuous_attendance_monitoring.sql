@@ -145,7 +145,10 @@ WHERE NOT EXISTS (
 WITH course AS (
     SELECT id FROM courses WHERE course_code = 'CSE999'
 ), students AS (
-    SELECT id FROM users WHERE student_id IN ('20201239', '20201240')
+    SELECT id
+    FROM users
+    WHERE role = 'student'
+      AND student_id IS NOT NULL
 )
 INSERT INTO course_enrollments (course_id, student_user_id, status)
 SELECT course.id, students.id, 'active'
