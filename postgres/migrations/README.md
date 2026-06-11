@@ -157,7 +157,7 @@ Run after `016_openwrt_collector_registry.sql` on persisted Service deployments.
 - `attendance_sessions.attendance_policy` with safe legacy backfill (`manual_v1` for non-smart legacy rows, `smart_window_v1` for legacy smart rows) and a legacy-safe DB default of `smart_window_v1`; Backend must explicitly write `continuous_presence_v1` for new continuous smart sessions.
 - `attendance_monitoring_leases` for session-scoped Backend worker ownership (`lease_owner`, `lease_until`, `heartbeat_at`).
 - `attendance_monitoring_states` for per-session/projection/student accumulators (`last_accounted_until`, `away_seconds`, `unknown_seconds_consumed`, `current_presence_state`, `last_presence_reason`, `status_candidate`, `finalized_at`).
-- `CSE999` / `B101` / `PRF002` seed data: two daily schedule windows (`00:00-12:00`, `12:00-00:00`) for all seven days plus active enrollments for `20201239` and `20201240`.
+- `CSE999` / `B101` / `PRF002` seed data: two daily schedule windows (`00:00-12:00`, `12:00-00:00`) for all seven days plus active enrollments for every seeded student account.
 
 Run after `017_selected_lms_subset.sql` on persisted Service deployments, before deploying Backend/Front versions that read `attendance_policy` or monitoring tables.
 
