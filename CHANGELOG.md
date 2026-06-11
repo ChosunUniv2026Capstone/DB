@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/ChosunUniv2026Capstone/DB/compare/v0.7.0...v0.7.1) (2026-06-11)
+
+
+### Bug Fixes
+
+* **db:** assign cse999 to prf001 ([400ff3a](https://github.com/ChosunUniv2026Capstone/DB/commit/400ff3a0744669aece1291ae350ff45de2184a93))
+
 ## [0.7.0](https://github.com/ChosunUniv2026Capstone/DB/compare/v0.6.0...v0.7.0) (2026-06-11)
 
 
