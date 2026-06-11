@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/ChosunUniv2026Capstone/DB/compare/v0.6.0...v0.7.0) (2026-06-11)
+
+
+### Features
+
+* **db:** enroll every student in CSE999 QA course ([f09a5cb](https://github.com/ChosunUniv2026Capstone/DB/commit/f09a5cb7cf2c4749db7c76159ba9e3030c446973))
+
 ## [0.6.0](https://github.com/ChosunUniv2026Capstone/DB/compare/v0.5.0...v0.6.0) (2026-06-10)
 
 
